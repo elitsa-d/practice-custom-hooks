@@ -8,3 +8,4 @@
 - Setup react-router "npm i react-router"
 - Add BrowserRouter Component
 - Add Routes
+- Dynamic Navigation
