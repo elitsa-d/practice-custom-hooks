@@ -7,3 +7,4 @@
 - Extract homepage components (Header, Home, Footer)
 - Setup react-router "npm i react-router"
 - Add BrowserRouter Component
+- Add Routes
