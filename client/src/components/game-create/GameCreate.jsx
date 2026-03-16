@@ -10,15 +10,12 @@ export default function GameCreate() {
     const data = Object.fromEntries(formData);
     data.players = Number(data.players);
     data._createdOn = Date.now();
-    const response = await fetch("http://localhost:3030/jsonstore/games", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const result = await response.json();
-    console.log(result);
+
+    const result = await request(
+      "http://localhost:3030/jsonstore/games",
+      "POST",
+      data,
+    );
 
     navigate("/games");
   };
