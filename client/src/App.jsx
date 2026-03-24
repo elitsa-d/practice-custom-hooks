@@ -10,6 +10,7 @@ import Register from "./components/register/Register";
 import { useState } from "react";
 import Login from "./components/login/Login";
 import Logout from "./components/logout/Logout";
+import Edit from "./components/edit/Edit";
 
 function App() {
   const [registeredUsers, setRegisteredUsers] = useState([]);
@@ -50,6 +51,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/games" element={<Catalog />}></Route>
         <Route path="games/:gameId/details" element={<Details />}></Route>
+        <Route path="games/:gameId/edit" element={<Edit />}></Route>
         <Route path="/games/create" element={<GameCreate />}></Route>
         <Route
           path="/register"
