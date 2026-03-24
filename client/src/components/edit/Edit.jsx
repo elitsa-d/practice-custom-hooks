@@ -1,4 +1,24 @@
+import { useState } from "react";
+
+const initialValues = {
+  title: "",
+  genre: "",
+  players: "",
+  date: "",
+  imageUrl: "",
+  summary: "",
+};
+
 export default function Edit() {
+  const [values, setValues] = useState(initialValues);
+
+  const changeHandler = (e) => {
+    setValues((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <section id="edit-page">
       <form id="add-new-game">
@@ -6,11 +26,13 @@ export default function Edit() {
           <h1>Edit Game</h1>
 
           <div className="form-group-half">
-            <label htmlFor="gameName">Game Name:</label>
+            <label htmlFor="title">Game Name:</label>
             <input
               type="text"
-              id="gameName"
-              name="gameName"
+              id="title"
+              name="title"
+              onChange={changeHandler}
+              value={values.title}
               placeholder="Enter game title..."
             />
           </div>
@@ -21,24 +43,34 @@ export default function Edit() {
               type="text"
               id="genre"
               name="genre"
+              onChange={changeHandler}
+              value={values.genre}
               placeholder="Enter game genre..."
             />
           </div>
 
           <div className="form-group-half">
-            <label htmlFor="activePlayers">Active Players:</label>
+            <label htmlFor="players">Active Players:</label>
             <input
               type="number"
-              id="activePlayers"
-              name="activePlayers"
+              id="players"
+              name="players"
               min="0"
+              onChange={changeHandler}
+              value={values.players}
               placeholder="0"
             />
           </div>
 
           <div className="form-group-half">
-            <label htmlFor="releaseDate">Release Date:</label>
-            <input type="date" id="releaseDate" name="releaseDate" />
+            <label htmlFor="date">Release Date:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              onChange={changeHandler}
+              value={values.date}
+            />
           </div>
 
           <div className="form-group-full">
@@ -47,6 +79,8 @@ export default function Edit() {
               type="text"
               id="imageUrl"
               name="imageUrl"
+              onChange={changeHandler}
+              value={values.imageUrl}
               placeholder="Enter image URL..."
             />
           </div>
@@ -57,6 +91,8 @@ export default function Edit() {
               name="summary"
               id="summary"
               rows="5"
+              onChange={changeHandler}
+              value={values.summary}
               placeholder="Write a brief summary..."
             ></textarea>
           </div>
