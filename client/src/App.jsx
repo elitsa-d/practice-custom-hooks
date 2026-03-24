@@ -9,6 +9,7 @@ import GameCreate from "./components/game-create/GameCreate";
 import Register from "./components/register/Register";
 import { useState } from "react";
 import Login from "./components/login/Login";
+import Logout from "./components/logout/Logout";
 
 function App() {
   const [registeredUsers, setRegisteredUsers] = useState([]);
@@ -38,6 +39,10 @@ function App() {
     setUser(user);
   };
 
+  const logoutHandler = () => {
+    setUser(null);
+  };
+
   return (
     <>
       <Header user={user} />
@@ -53,6 +58,10 @@ function App() {
         <Route
           path="/login"
           element={<Login user={user} onLogin={loginHandler} />}
+        ></Route>
+        <Route
+          path="/logout"
+          element={<Logout onLogout={logoutHandler} />}
         ></Route>
       </Routes>
       <Footer />
