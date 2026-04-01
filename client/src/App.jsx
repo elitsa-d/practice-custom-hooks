@@ -23,7 +23,9 @@ function App() {
 
     const newUser = { email, password };
 
-    setRegisteredUsers((state) => [...state, newUser]);
+    setRegisteredUsers((state) => {
+      return [...state, newUser];
+    });
 
     setUser(newUser);
   };
@@ -34,7 +36,7 @@ function App() {
     );
 
     if (!user) {
-      throw new Error("Invalid username or password");
+      throw new Error("Invalid email or password");
     }
 
     setUser(user);
@@ -58,7 +60,7 @@ function App() {
         <Route path="/games/create" element={<GameCreate />}></Route>
         <Route
           path="/register"
-          element={<Register user={user} onRegister={registerHandler} />}
+          element={<Register onRegister={registerHandler} />}
         ></Route>
         <Route
           path="/login"
