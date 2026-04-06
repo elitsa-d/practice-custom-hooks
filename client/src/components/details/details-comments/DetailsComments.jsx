@@ -1,20 +1,7 @@
-import { useState } from "react";
-import { useParams } from "react-router";
-import { useEffect } from "react";
-import request from "../../../utils/request";
+import useDetailsComments from "../../../hooks/useDetailsComments";
 
 export default function DetailsComments({ refresh }) {
-  const [comments, setComments] = useState([]);
-  const { gameId } = useParams();
-
-  useEffect(() => {
-    request("comments").then((result) => {
-      const gameComments = Object.values(result).filter(
-        (comment) => comment.gameId === gameId,
-      );
-      setComments(gameComments);
-    });
-  }, [gameId, refresh]);
+  const { comments } = useDetailsComments(refresh);
 
   return (
     <div className="details-comments">

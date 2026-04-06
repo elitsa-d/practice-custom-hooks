@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useState } from "react";
+import request from "../utils/request";
+
 export default function useLatestGames() {
   const [latestGames, setLatestGames] = useState([]);
 

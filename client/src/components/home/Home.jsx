@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
 import Game from "../game-card/GameCard";
-import request from "../../utils/request";
 import useLatestGames from "../../hooks/useLatestGames";
 
 export default function Home() {
-  const [latestGames] = useLatestGames();
+  const { latestGames } = useLatestGames();
 
   return (
     <section id="welcome-world">

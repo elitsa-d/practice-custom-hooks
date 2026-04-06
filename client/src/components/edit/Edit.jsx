@@ -1,6 +1,3 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
-import request from "../../utils/request";
 import useEdit from "../../hooks/useEdit";
 
 const initialValues = {

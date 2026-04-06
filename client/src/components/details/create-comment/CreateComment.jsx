@@ -24,7 +24,7 @@ export default function CreateComment({ user, onCreate }) {
     }
   };
 
-  // {/* <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) --> */}
+  // Add Comment ( Only for logged-in users, which is not creators of the current game )
   return (
     <article className="create-comment">
       <label>Add new comment:</label>
