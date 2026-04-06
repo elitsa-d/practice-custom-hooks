@@ -1,28 +1,11 @@
-import { useNavigate } from "react-router";
+import useLogin from "../../hooks/useLogin";
 
 export default function Login({ onLogin }) {
-  const navigate = useNavigate();
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
+  const { submitHandler } = useLogin();
 
-    if (!email || !password) {
-      return alert("Email and password are required!");
-    }
-
-    try {
-      onLogin(email, password);
-    } catch (err) {
-      alert(err.message);
-    }
-
-    navigate("/");
-  };
   return (
     <section id="login-page">
-      <form id="login" onSubmit={submitHandler}>
+      <form id="login" onSubmit={(e) => submitHandler(e, onLogin)}>
         <div className="container">
           <h1>Login</h1>
           <label htmlFor="email">Email</label>

@@ -1,35 +1,14 @@
-import { useNavigate } from "react-router";
+import useRegister from "../../hooks/useRegister";
 
 export default function Register({ onRegister }) {
-  const navigate = useNavigate();
-
-  const registerSubmit = (formData) => {
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const confirmPassword = formData.get("confirm-password");
-
-    //Validation
-    if (!email || !password) {
-      return alert("Email and password are required.");
-    }
-
-    if (password !== confirmPassword) {
-      return alert("Password mismatch");
-    }
-
-    try {
-      //Register User
-      onRegister(email, password);
-
-      navigate("/");
-    } catch (err) {
-      alert(err.message);
-    }
-  };
+  const { registerSubmit } = useRegister();
 
   return (
     <section id="register-page" className="content auth">
-      <form id="register" action={registerSubmit}>
+      <form
+        id="register"
+        action={(formData) => registerSubmit(formData, onRegister)}
+      >
         <div className="container">
           <div className="brand-logo"></div>
           <h1>Register</h1>

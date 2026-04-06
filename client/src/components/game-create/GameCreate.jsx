@@ -1,47 +1,13 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
-import request from "../../utils/request";
+import useCreateGame from "../../hooks/useCreateGame";
 
 export default function GameCreate() {
-  const navigate = useNavigate();
-  const [imageUpload, setImageUpload] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
-
-  useEffect(() => {
-    return () => {
-      URL.revokeObjectURL(imagePreview);
-      setImagePreview(null);
-    };
-  }, [imageUpload, imagePreview]);
-
-  const createGameHandler = async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const { image, ...data } = Object.fromEntries(formData);
-
-    if (imageUpload) {
-      //TODO updaload image
-    } else {
-      data.imageUrl = image;
-    }
-    data.players = Number(data.players);
-    data._createdOn = Date.now();
-
-    await request("games", "POST", data);
-
-    navigate("/games");
-  };
-
-  const imageUploadClickHandler = () => {
-    setImageUpload((state) => !state);
-  };
-
-  const imageChangeHandler = (e) => {
-    const image = e.target.files[0];
-    const imageUrl = URL.createObjectURL(image);
-    setImagePreview(imageUrl);
-  };
+  const {
+    createGameHandler,
+    imageUploadClickHandler,
+    imageChangeHandler,
+    imageUpload,
+    imagePreview,
+  } = useCreateGame();
 
   return (
     <section id="add-page">
