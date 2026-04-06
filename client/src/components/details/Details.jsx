@@ -5,16 +5,13 @@ import DetailsComments from "./details-comments/DetailsComments";
 import CreateComment from "./create-comment/CreateComment";
 import useDetails from "../../hooks/useDetails";
 import useDeleteGame from "../../hooks/useDeleteGame";
+import useRefresh from "../../hooks/useRefresh";
 
 export default function Details({ user }) {
   const { gameId } = useParams();
   const { game } = useDetails();
   const { deleteGameHandler } = useDeleteGame(game);
-  const [refresh, setRefresh] = useState(false);
-
-  const refreshHandler = () => {
-    setRefresh((state) => !state);
-  };
+  const { refresh, refreshHandler } = useRefresh();
 
   return (
     <section id="game-details">
