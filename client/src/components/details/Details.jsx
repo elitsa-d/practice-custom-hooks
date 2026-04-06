@@ -4,32 +4,13 @@ import { Link, useNavigate } from "react-router";
 import DetailsComments from "./details-comments/DetailsComments";
 import CreateComment from "./create-comment/CreateComment";
 import useDetails from "../../hooks/useDetails";
+import useDeleteGame from "../../hooks/useDeleteGame";
 
 export default function Details({ user }) {
-  const { game } = useDetails();
   const { gameId } = useParams();
-  const navigate = useNavigate();
+  const { game } = useDetails();
+  const { deleteGameHandler } = useDeleteGame(game);
   const [refresh, setRefresh] = useState(false);
-
-  const deleteGameHandler = async () => {
-    const isConfirmed = confirm(
-      `Are you sure you want to delete game: ${game.title}`,
-    );
-
-    if (!isConfirmed) {
-      return;
-    }
-
-    try {
-      await fetch(`${baseUrl}/${gameId}`, {
-        method: "DELETE",
-      });
-
-      navigate("/games");
-    } catch (error) {
-      alert("Unable to delete game: ", error.message);
-    }
-  };
 
   const refreshHandler = () => {
     setRefresh((state) => !state);
