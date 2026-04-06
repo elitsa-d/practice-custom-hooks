@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import request from "../../utils/request";
+import useEdit from "../../hooks/useEdit";
 
 const initialValues = {
   title: "",
@@ -12,35 +13,7 @@ const initialValues = {
 };
 
 export default function Edit() {
-  const navigate = useNavigate();
-  const { gameId } = useParams();
-  const [values, setValues] = useState(initialValues);
-
-  const changeHandler = (e) => {
-    setValues((state) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  useEffect(() => {
-    request(`games/${gameId}`)
-      .then((result) => {
-        setValues(result);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  }, [gameId]);
-
-  const editGameHandler = async () => {
-    try {
-      await request(`games/${gameId}`, "PUT", values);
-      navigate(`/games/${gameId}/details`);
-    } catch (err) {
-      alert(err.message);
-    }
-  };
+  const { values, changeHandler, editGameHandler } = useEdit(initialValues);
 
   return (
     <section id="edit-page">
