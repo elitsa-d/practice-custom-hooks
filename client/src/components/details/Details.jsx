@@ -1,23 +1,15 @@
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import DetailsComments from "./details-comments/DetailsComments";
 import CreateComment from "./create-comment/CreateComment";
-
-const baseUrl = `http://localhost:3030/jsonstore/games/`;
+import useDetails from "../../hooks/useDetails";
 
 export default function Details({ user }) {
-  const navigate = useNavigate();
+  const { game } = useDetails();
   const { gameId } = useParams();
-  const [game, setGame] = useState({});
+  const navigate = useNavigate();
   const [refresh, setRefresh] = useState(false);
-
-  useEffect(() => {
-    fetch(`${baseUrl}/${gameId}`)
-      .then((response) => response.json())
-      .then((result) => setGame(result))
-      .catch((error) => alert(error.message));
-  }, [gameId]);
 
   const deleteGameHandler = async () => {
     const isConfirmed = confirm(
